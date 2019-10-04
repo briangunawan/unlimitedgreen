@@ -14,12 +14,17 @@
             display: inline-block;
         }
     </style>
+
 </head>
 <body>
 
+
+
 <div class="container-fluid">
-    <img src="floorplan.png" class="img-fluid rounded mx-auto d-block" alt="Responsive image">
+    <canvas id="cvs" width="345" height="370"/>
 </div>
+<input type="checkbox" name="Temp" value="True" checked> Temp<br>
+<input type="checkbox" name="Activity" value="True" checked> Activity<br>
 
 
 
@@ -31,11 +36,85 @@
 
 
 <nav class="navbar fixed-bottom navbar-dark bg-dark">
-<!--    <a class="navbar-brand" href="#">Unlimited Green</a>-->
-        <a class="active" href="#">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-link" href="#">Features</a>
-        <a class="nav-link" href="#">°C</a>
+        <a class="nav-link mx-auto" href="#"><img src="map.png" width=30> </a>
+        <a class="nav-link mx-auto" href="#"><img src="chart.png" width=30></a>
+        <a class="nav-link mx-auto" href="#"><img src="temp.png" height=30</a>
 
 </nav>
 </body>
+<script>
+
+
+
+    var c = document.getElementById("cvs");
+    var ctx = c.getContext("2d");
+
+
+    function drawCircle(x,y) {
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = "#000000"
+        ctx.beginPath();
+        ctx.arc(x, y, 7, 0, 2 * Math.PI);
+        ctx.fill()
+    }
+
+
+    function drawmap() {
+        ctx.globalAlpha = 1
+        ctx.drawImage(img, 10, 10,345,370);
+    }
+
+
+    function drawTop() {
+        //main office
+        ctx.globalAlpha = 0.4
+        ctx.fillStyle = "#467FD7"
+        ctx.beginPath();
+        ctx.moveTo(60, 54);
+        ctx.lineTo(110, 26);
+        ctx.lineTo(310, 127);
+        ctx.lineTo(310, 160);
+        ctx.lineTo(60,160)
+        ctx.fill();
+    }
+
+    function drawLeft() {
+        //coffee machine area
+        ctx.globalAlpha = 0.4
+        ctx.fillStyle = "#54c242"
+        ctx.fillRect(60, 160, 80,160)
+    }
+
+    function drawRight() {
+        ctx.fillStyle = "#FF0000"
+        ctx.beginPath();
+        ctx.moveTo(310, 160);
+        ctx.lineTo(223, 160);
+        ctx.lineTo(223, 323);
+        ctx.lineTo(60, 323);
+        ctx.lineTo(60,350);
+        ctx.lineTo(310,350)
+        ctx.fill();
+    }
+
+
+    var img = new Image();   // Create new img element
+    img.onload = function() {
+        drawmap();
+
+        drawTop();
+
+        drawLeft();
+
+        drawRight();
+
+        for (i=0; i < 50; i++) {
+            drawCircle(60+(Math.random()*250),50+(Math.random()*250));
+
+        }
+
+    }
+    img.src = 'floorplan.png'
+
+</script>
 </html>

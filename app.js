@@ -13,4 +13,12 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+app.get('/insight', function(req, res) {
+    res.sendFile(path.join(__dirname + '/insight.html'));
+});
+
+app.get('/temp', function(req, res) {
+    res.sendFile(path.join(__dirname + '/temp.html'));
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
