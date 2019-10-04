@@ -36,7 +36,6 @@
     <div class="d-flex justify-content-center">...</div>
         <input type="checkbox" id="temp" name="Temp" onclick="drawstuff()" checked> Temp<br>
         <input type="checkbox" id="act" name="Activity" onclick="drawstuff()" checked> Activity<br>
-
     </div>
 </div>
 
@@ -54,19 +53,55 @@
         <a class="nav-link mx-auto" href="#"><img src="map.png" width=30> </a>
         <a class="nav-link mx-auto" href="#"><img src="chart.png" width=30></a>
         <a class="nav-link mx-auto" href="#"><img src="temp.png" height=30></a>
+
 </nav>
 </body>
 <script>
 
-    console.log("index")
+    console.log("input");
 
     var c = document.getElementById("cvs");
     var ctx = c.getContext("2d");
 
-    c.addEventListener('mousedown', function(e) {
-        drawstuff()
-    })
 
+    function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect()
+        const x = event.clientX - rect.left
+        const y = event.clientY - rect.top
+
+        if (y < 150){
+            var xhr = new XMLHttpRequest();
+            xhr.open("get", '/top', true);
+            xhr.send();
+            console.log(1)
+        }
+        else {
+            if (x < 200) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("get", '/left', true);
+                xhr.send();
+                console.log(2)
+
+            }
+            else {
+                var xhr = new XMLHttpRequest();
+                xhr.open("get", '/right', true);
+                xhr.send();
+                console.log(3)
+
+            }
+        }
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("get", '/left', true);
+        xhr.send();
+        console.log('sent')
+    }
+
+    c.addEventListener('mousedown', function(e) {
+        getCursorPosition(c, e)
+    })
 
     function drawCircle(x,y) {
         ctx.globalAlpha = 1;
@@ -84,87 +119,35 @@
 
 
     function drawTop() {
-
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (this.readyState != 4) return;
-
-            if (this.status == 200) {
-                var l = JSON.parse(this.responseText).left;
-                console.log(l)
-                ctx.globalAlpha = 0.4
-                ctx.fillStyle = "#467FD7"
-                ctx.beginPath();
-                ctx.moveTo(60, 54);
-                ctx.lineTo(110, 26);
-                ctx.lineTo(310, 127);
-                ctx.lineTo(310, 160);
-                ctx.lineTo(60,160)
-                ctx.fillStyle = 'rgb(' + l*15 +',0,60)'
-                ctx.fill();
-
-            }
-
-        };
-
-        xhr.open('GET', '/topt', true);
-        xhr.send();
-
         //main office
-
+        ctx.globalAlpha = 0.4
+        ctx.fillStyle = "#467FD7"
+        ctx.beginPath();
+        ctx.moveTo(60, 54);
+        ctx.lineTo(110, 26);
+        ctx.lineTo(310, 127);
+        ctx.lineTo(310, 160);
+        ctx.lineTo(60,160)
+        ctx.fill();
     }
 
     function drawLeft() {
-
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (this.readyState != 4) return;
-
-            if (this.status == 200) {
-                var l = JSON.parse(this.responseText).left;
-                console.log(l)
-                ctx.globalAlpha = 0.4
-                // ctx.fillStyle = "rgb(" + l + ", 0, " + 255-l + ")"
-                ctx.fillStyle = 'rgb(' + l*15 +',0,60)'
-
-                ctx.fillRect(60, 160, 80,160)
-            }
-
-        };
-
-        xhr.open('GET', '/leftt', true);
-        xhr.send();
-
-
+        //coffee machine area
+        ctx.globalAlpha = 0.4
+        ctx.fillStyle = "#54c242"
+        ctx.fillRect(60, 160, 80,160)
     }
 
     function drawRight() {
-
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (this.readyState != 4) return;
-
-            if (this.status == 200) {
-                var l = JSON.parse(this.responseText).left;
-                console.log(l)
-                ctx.fillStyle = "#FF0000"
-                ctx.beginPath();
-                ctx.moveTo(310, 160);
-                ctx.lineTo(223, 160);
-                ctx.lineTo(223, 323);
-                ctx.lineTo(60, 323);
-                ctx.lineTo(60,350);
-                ctx.lineTo(310,350)
-                ctx.fillStyle = 'rgb(' + l*15 +',0,60)'
-                ctx.fill();
-
-            }
-
-        };
-
-        xhr.open('GET', '/rightt', true);
-        xhr.send();
-
+        ctx.fillStyle = "#FF0000"
+        ctx.beginPath();
+        ctx.moveTo(310, 160);
+        ctx.lineTo(223, 160);
+        ctx.lineTo(223, 323);
+        ctx.lineTo(60, 323);
+        ctx.lineTo(60,350);
+        ctx.lineTo(310,350)
+        ctx.fill();
     }
 
 
@@ -197,14 +180,6 @@
     var img = new Image();   // Create new img element
     img.onload = function() {
         drawmap();
-
-        drawTop();
-
-        drawLeft();
-
-        drawRight();
-
-        drawActivity();
 
     }
     img.src = 'floorplan.png'
