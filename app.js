@@ -11,6 +11,7 @@ var left = 0;
 var right = 0;
 var top = 0;
 
+// First, run 'npm install pusher'
 
 app.get('/demo', function(req, res) {
     res.sendFile(path.join(__dirname + '/input.html'));
@@ -22,14 +23,14 @@ app.get('/', function(req, res) {
 
 
 
-// app.post('/left', function(req, res) {
-//     left = left + 1;
-//     console.log(left)
-// });
-//
-// app.get('/left', function(req, res) {
-//     res.send(left)
-// });
+app.get('/left', function(req, res) {
+    left = left + 1
+});
+
+app.get('/leftt', function(req, res) {
+
+    res.send({left:left})
+});
 //
 // app.post('/left', function(req, res) {
 //
