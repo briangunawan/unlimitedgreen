@@ -34,8 +34,8 @@
         <canvas id="cvs" width="345" height="370"/>
     </div>
     <div class="d-flex justify-content-center">...</div>
-        <input type="checkbox" id="temp" name="Temp" onclick="drawstuff()" checked> Temp<br>
-        <input type="checkbox" id="act" name="Activity" onclick="drawstuff()" checked> Activity<br>
+        <input type="checkbox" id="temp" name="Temp" onclick="drawstuff()" hidden checked> Temp<br>
+        <input type="checkbox" id="act" name="Activity" onclick="drawstuff()"  hidden checked> Activity<br>
     </div>
 </div>
 
@@ -73,6 +73,7 @@
             var xhr = new XMLHttpRequest();
             xhr.open("get", '/top', true);
             xhr.send();
+            drawTop()
             console.log(1)
         }
         else {
@@ -80,6 +81,7 @@
                 var xhr = new XMLHttpRequest();
                 xhr.open("get", '/left', true);
                 xhr.send();
+                drawLeft()
                 console.log(2)
 
             }
@@ -87,10 +89,10 @@
                 var xhr = new XMLHttpRequest();
                 xhr.open("get", '/right', true);
                 xhr.send();
+                drawRight()
                 console.log(3)
 
             }
-            alert("iot reading sent!")
         }
 
 
