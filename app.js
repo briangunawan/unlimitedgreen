@@ -24,24 +24,31 @@ app.get('/', function(req, res) {
 
 
 app.get('/left', function(req, res) {
-    left = left + 1
+    left += 1
 });
-
 app.get('/leftt', function(req, res) {
 
     res.send({left:left})
 });
-//
-// app.post('/left', function(req, res) {
-//
-// });
-// app.post('/left', function(req, res) {
-//
-// });
-//
-// app.get('/demo', function(req, res) {
-//     res.sendFile(path.join(__dirname + '/index.html'));
-// });
+
+app.get('/rightt', function(req, res) {
+
+    res.send({left:right})
+});
+app.get('/right', function(req, res) {
+    right += 1
+});
+
+
+app.get('/topt', function(req, res) {
+
+    res.send({left:top})
+});
+app.get('/top', function(req, res) {
+    top += 1
+});
+
+
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
