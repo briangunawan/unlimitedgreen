@@ -52,19 +52,28 @@
 <nav class="navbar fixed-bottom navbar-dark bg-dark">
         <a class="nav-link mx-auto" href="#"><img src="map.png" width=30> </a>
         <a class="nav-link mx-auto" href="#"><img src="chart.png" width=30></a>
-        <a class="nav-link mx-auto" href="#"><img src="temp.png" height=30</a>
+        <a class="nav-link mx-auto" href="#"><img src="temp.png" height=30></a>
 
 </nav>
 </body>
 <script>
 
-    console.log("index")
+    console.log("input");
 
     var c = document.getElementById("cvs");
     var ctx = c.getContext("2d");
 
 
+    function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect()
+        const x = event.clientX - rect.left
+        const y = event.clientY - rect.top
+        console.log("x: " + x + " y: " + y)
+    }
 
+    c.addEventListener('mousedown', function(e) {
+        getCursorPosition(c, e)
+    })
 
     function drawCircle(x,y) {
         ctx.globalAlpha = 1;
@@ -143,14 +152,6 @@
     var img = new Image();   // Create new img element
     img.onload = function() {
         drawmap();
-
-        drawTop();
-
-        drawLeft();
-
-        drawRight();
-
-        drawActivity();
 
     }
     img.src = 'floorplan.png'

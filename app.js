@@ -7,18 +7,40 @@ const app = express()
 
 app.use(express.static(__dirname + '/'));
 
+var left = 0;
+var right = 0;
+var top = 0;
 
+
+app.get('/demo', function(req, res) {
+    res.sendFile(path.join(__dirname + '/input.html'));
+});
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.get('/insight', function(req, res) {
-    res.sendFile(path.join(__dirname + '/insight.html'));
-});
 
-app.get('/temp', function(req, res) {
-    res.sendFile(path.join(__dirname + '/temp.html'));
-});
+
+// app.post('/left', function(req, res) {
+//     left = left + 1;
+//     console.log(left)
+// });
+//
+// app.get('/left', function(req, res) {
+//     res.send(left)
+// });
+//
+// app.post('/left', function(req, res) {
+//
+// });
+// app.post('/left', function(req, res) {
+//
+// });
+//
+// app.get('/demo', function(req, res) {
+//     res.sendFile(path.join(__dirname + '/index.html'));
+// });
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
